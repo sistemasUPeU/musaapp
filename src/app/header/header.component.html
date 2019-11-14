@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" role="navigation">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fa fa-bus" aria-hidden="true"></i> MUSA</a>
+        <!--
+        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+            &#9776;
+        </button>-->
+        <div class="collapse navbar-collapse" id="exCollapsingNavbar">
+            <!--
+            <ul class="nav navbar-nav">
+                <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-university" aria-hidden="true"></i>
+                        About</a></li>
+                <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-bars" aria-hidden="true"></i>
+                        Service</a></li>
+                <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-contao" aria-hidden="true"></i>
+                        Contactos</a></li>
+            </ul>
+        -->
+            <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                <li class="dropdown order-1">
+                    <a href="#" style="color: white;" [routerLink]="['/login']" routerLinkActive="router-link-active" ><i class="fas fa-user-lock"></i></a>
+                    <button type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        class="btn btn-primary dropdown-toggle" disabled><i class="fa fa-address-card"
+                            aria-hidden="true" ></i></button>
+                    <ul class="dropdown-menu dropdown-menu-right mt-2 espacio">
+                        <li class="px-3 py-2 espacio margen">
+                            <p class="margen"><i class="far fa-user"></i></p>
+                            <p class="margen">David Reyna Barreto</p>
+                            <strong class="margen">Administrador</strong>
+                            <hr>
+                        </li>
+
+                        <li class="px-3 py-2 espacio margen">
+                            <a href="#" class="margen"><i class="fas fa-user-edit"></i></a>
+                            <a href="#" class="margen" style="padding-left: 20px;" [routerLink]="['/login']" routerLinkActive="router-link-active">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="modalPassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Forgot password</h3>
+                <button type="button" class="close font-weight-light" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Reset your password..</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

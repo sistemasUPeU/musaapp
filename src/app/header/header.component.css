@@ -1,0 +1,17 @@
+button:focus {
+    outline: 0;
+}
+
+.navbar .dropdown-menu .form-control {
+    width: 200px;
+}
+.espacio{
+    text-align: center;
+    color: rgb(88, 87, 86);
+    min-width: 200px;
+}
+.margen{
+    margin: 0px; 
+    padding: 0px;
+    outline: 0;
+}
