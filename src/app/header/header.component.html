@@ -19,22 +19,22 @@
             </ul>
         -->
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-                <li class="dropdown order-1">
-                    <a href="#" style="color: white;" [routerLink]="['/login']" routerLinkActive="router-link-active" ><i class="fas fa-user-lock"></i></a>
-                    <button type="button" id="dropdownMenu1" data-toggle="dropdown"
-                        class="btn btn-primary dropdown-toggle" disabled><i class="fa fa-address-card"
-                            aria-hidden="true" ></i></button>
+                <li class="dropdown">
+                    <a *ngIf="!loginService.isAuthenticated()" href="#" style="color: white;" [routerLink]="['/login']" routerLinkActive="router-link-active"><i class="fas fa-user-lock"></i></a>
+                    <a *ngIf="loginService.isAuthenticated()" class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <i class="fa fa-address-card" aria-hidden="true" ></i>
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-right mt-2 espacio">
-                        <li class="px-3 py-2 espacio margen">
+                        <li class="dropdownMenuLink">
                             <p class="margen"><i class="far fa-user"></i></p>
-                            <p class="margen">David Reyna Barreto</p>
+                            <p class="margen">{{loginService.empleado.nombres+' '+loginService.empleado.apellidos}}</p>
                             <strong class="margen">Administrador</strong>
                             <hr>
                         </li>
 
                         <li class="px-3 py-2 espacio margen">
                             <a href="#" class="margen"><i class="fas fa-user-edit"></i></a>
-                            <a href="#" class="margen" style="padding-left: 20px;" [routerLink]="['/login']" routerLinkActive="router-link-active">
+                            <a href="#" class="margen" style="padding-left: 20px;" (click)="logout()">
                                 <i class="fas fa-sign-out-alt"></i>
                             </a>
                         </li>
@@ -44,22 +44,3 @@
         </div>
     </div>
 </nav>
-
-<div id="modalPassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Forgot password</h3>
-                <button type="button" class="close font-weight-light" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
-                <p>Reset your password..</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
