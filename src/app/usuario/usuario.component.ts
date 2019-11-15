@@ -21,19 +21,23 @@ export class UsuarioComponent implements OnInit {
   login():void{
     console.log(this.usuario);
     if(this.usuario.username==null || this.usuario.password==null){
-      Swal.fire('Error Login','Username o Password incorrectos');
+      Swal.fire('Error Login','Username o Password incorrectos', 'error');
       return;
     }
     this.loginService.login(this.usuario).subscribe(response=>{
       console.log(response);
-      let datos = JSON.parse(atob(response.access_token.split(".")[1]));
-      console.log(datos.APELLIDOS);
-
-      this.loginService.guardarUsuario(response.access_token)
+      this.loginService.guardarUsuario(response.access_token);
+      this.loginService.guardarToken(response.access_token);
+      let usuario = this.loginService.empleado;
       this.router.navigate(['/']);
-      Swal.fire('login', 'Bienvenido: '+datos.NOMBRES+' has iniciado Sesión con éxito..!');
+      Swal.fire('Login', 'Bienvenido: '+usuario.nombres+' has iniciado Sesión con éxito..!','success');
       
-    });
+    }, error =>{
+      if(error.status==400){
+        Swal.fire('Error Login', 'Usuario o clave incorrectas!', 'error');
+      }
+    }
+    );
   }
 
 }

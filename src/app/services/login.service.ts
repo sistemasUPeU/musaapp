@@ -13,6 +13,24 @@ export class LoginService {
   private _empleado : Empleado;
 
   constructor(private http:HttpClient) { }
+  public get empleado():Empleado{
+    if(this._empleado!=null){
+      return this._empleado;
+    }else if(this._empleado==null && sessionStorage.getItem("empleado")!=null){
+      this._empleado = JSON.parse(sessionStorage.getItem('empleado')) as Empleado;
+      return this._empleado;
+    }
+    return new Empleado();
+  }
+  public get token():string{
+    if(this._token!=null){
+      return this._token;
+    }else if(this._token==null && sessionStorage.getItem("token")!=null){
+      this._token = sessionStorage.getItem('token');
+      return this._token;
+    }
+    return null;
+  }
   login(usuario:Usuario):Observable<any>{
     const urlEndpoint = 'http://localhost:8081/oauth/token';
 
@@ -27,8 +45,8 @@ export class LoginService {
     console.log(params.toString());
     return this.http.post<any>(urlEndpoint, params.toString(), {headers: httpHeaders});
   }
-  guardarUsuario(accesToken:String):void{
-    let datos = JSON.parse(atob(accesToken.split(".")[1]));
+  guardarUsuario(accesToken:string):void{
+    let datos = this.obtenerDatosToken(accesToken);
     this._empleado = new Empleado();
     this._empleado.nombres = datos.NOMBRES;
     this._empleado.apellidos = datos.APELLIDOS;
