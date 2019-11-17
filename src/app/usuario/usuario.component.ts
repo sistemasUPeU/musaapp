@@ -23,13 +23,11 @@ export class UsuarioComponent implements OnInit {
     }
   }
   login():void{
-    console.log(this.usuario);
     if(this.usuario.username==null || this.usuario.password==null){
       Swal.fire('Error Login','Username o Password incorrectos', 'error');
       return;
     }
     this.loginService.login(this.usuario).subscribe(response=>{
-      console.log(response);
       this.loginService.guardarUsuario(response.access_token);
       this.loginService.guardarToken(response.access_token);
       let usuario = this.loginService.empleado;
