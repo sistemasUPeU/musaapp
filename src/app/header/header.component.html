@@ -1,32 +1,33 @@
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-primary ">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#"><i class="fas fa-bus" style="margin-right: 10px;"></i>MUSA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
           aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav mr-auto" *ngIf="!loginService.isAuthenticated()">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="#"><i class="fas fa-home"></i> Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href="#">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+              <a class="nav-link" href="#"><i class="fab fa-servicestack" style="margin-right: 5px;"></i>Services</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">Dropdown
-              </a>
-              <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-pager" style="margin-right: 5px;"></i>Pages</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="far fa-address-card" style="margin-right: 5px;"></i>Contact</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav mr-auto" *ngIf="loginService.isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Buses</a>
+                </li>
           </ul>
           <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item" *ngIf="!loginService.isAuthenticated()">
@@ -41,45 +42,14 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-default"
                 aria-labelledby="navbarDropdownMenuLink-333">
-                <a class="dropdown-item text-primary" href="#"><strong>{{loginService.empleado.nombres+' '+loginService.empleado.apellidos}}</strong></a>
-                <a class="dropdown-item text-primary" href="#">Another action</a>
-                <a class="dropdown-item text-primary" href="#" (click)="logout()"><i class="fas fa-sign-in-alt"></i></a>
+                <a class="dropdown-item text-primary" href="#" style="text-align: center;"><strong class="texto">{{loginService.usuarioDato.nombres  }} {{loginService.usuarioDato.apellidos}}</strong></a>
+                <a class="dropdown-item text-primary" href="#" style="text-align: center;">{{loginService.usuarioDato.detalle}}</a>
+                <a class="dropdown-item text-primary" href="#" (click)="logout()" style="text-align: right;"><i class="fas fa-sign-in-alt fa-2x" style="margin-right: 10px;"></i></a>
               </div>
             </li>
           </ul>
         </div>
-      </nav>
-
-<!--
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" role="navigation">
-    <div class="container">
-        <a class="navbar-brand" href="#"><i class="fa fa-bus" aria-hidden="true"></i> MUSA</a>
-        <div class="collapse navbar-collapse" id="exCollapsingNavbar">
-            <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-                <li class="dropdown">
-                    <a *ngIf="!loginService.isAuthenticated()" href="#" style="color: white;" [routerLink]="['/login']" routerLinkActive="router-link-active"><i class="fas fa-user-lock"></i></a>
-                    
-                    <ul class="dropdown-menu dropdown-menu-right mt-2 espacio">
-                        <li class="dropdownMenuLink">
-                            <p class="margen"><i class="far fa-user"></i></p>
-                            <p class="margen">{{loginService.empleado.nombres+' '+loginService.empleado.apellidos}}</p>
-                            <strong class="margen">Administrador</strong>
-                            <hr>
-                        </li>
-
-                        <li class="px-3 py-2 espacio margen">
-                            <a href="#" class="margen"><i class="fas fa-user-edit"></i></a>
-                            <a href="#" class="margen" style="padding-left: 20px;" (click)="logout()">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </a>
-                        </li>
-                    </ul>
-                    <a *ngIf="loginService.isAuthenticated()" class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                            <i class="fa fa-address-card" aria-hidden="true" ></i>
-                        </a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </nav>
--->
+<h1 class="text-primary" *ngIf="loginService.isAuthenticated()" style="text-align: center;">Bienvenido al Sistema MUSA</h1>
+
+

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpEvent} from '@angular/common/http';
 import { Usuario } from '../modelo/usuario';
-import { Empleado } from '../modelo/empleado';
+import { UsuarioDatos } from '../modelo/UsuarioDato';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,17 +12,20 @@ export class LoginService {
 
   private _usuario: Usuario;
   private _token : string;
-  private _empleado : Empleado;
+  private _userD:UsuarioDatos;
 
   constructor(private http:HttpClient) { }
-  public get empleado():Empleado{
-    if(this._empleado!=null){
-      return this._empleado;
-    }else if(this._empleado==null && sessionStorage.getItem("empleado")!=null){
-      this._empleado = JSON.parse(sessionStorage.getItem('empleado')) as Empleado;
-      return this._empleado;
+  private agregarAutorizationHeader(){
+    
+  }
+  public get usuarioDato():UsuarioDatos{
+    if(this._userD!=null){
+      return this._userD;
+    }else if(this._userD==null && sessionStorage.getItem("usuario")!=null){
+      this._userD = JSON.parse(sessionStorage.getItem('usuario')) as UsuarioDatos;
+      return this._userD;
     }
-    return new Empleado();
+    return new UsuarioDatos();
   }
   public get token():string{
     if(this._token!=null){
@@ -33,7 +38,6 @@ export class LoginService {
   }
   login(usuario:Usuario):Observable<any>{
     const urlEndpoint = 'http://localhost:8081/oauth/token';
-
     const credenciales = btoa('musa'+':'+'1234567');
 
     const httpHeaders = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded',
@@ -46,10 +50,14 @@ export class LoginService {
   }
   guardarUsuario(accesToken:string):void{
     let datos = this.obtenerDatosToken(accesToken);
-    this._empleado = new Empleado();
-    this._empleado.nombres = datos.NOMBRES;
-    this._empleado.apellidos = datos.APELLIDOS;
-    sessionStorage.setItem('empleado',JSON.stringify(this._empleado));
+    this._userD = new UsuarioDatos();
+    this._userD.username=datos.USERNAME;
+    this._userD.nombres = datos.NOMBRES;
+    this._userD.apellidos = datos.APELLIDOS;
+    this._userD.detalle = datos.DETALLE;
+    this._userD.idusuario = datos.IDUSUARIO;
+    this._userD.idrol = datos.IDROL;
+    sessionStorage.setItem('usuario',JSON.stringify(this._userD));
   }
   guardarToken(accesToken:string):void{
     this._token = accesToken;

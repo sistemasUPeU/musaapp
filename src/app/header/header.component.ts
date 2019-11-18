@@ -13,8 +13,9 @@ export class HeaderComponent implements OnInit {
     logout():void{
 
       this.loginService.logout();
-      Swal.fire('Logout', 'Hola '+this.loginService.empleado.nombres+' has cerrado sesión con Exito!', 'success')
+      Swal.fire('Logout', 'Hola <b>'+this.loginService.usuarioDato.username+'</b> has cerrado sesión con Exito!', 'success')
       this.router.navigate(['/']);
+      //swal({title: 'hello', text: 'hello ${<strong>{name}</strong>}', icon: 'success' })
     }
  ngOnInit() {
   }
