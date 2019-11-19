@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../modelo/usuario';
 import { HttpClient, HttpHeaders, HttpRequest, HttpEvent } from '@angular/common/http';
-import {map, catchError, tap} from 'rxjs/Operators';
 import { Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 //npm install --save sweetalert;

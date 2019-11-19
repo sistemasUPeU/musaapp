@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private loginService:LoginService, private router: Router) { }
+
+  requests: any;
+
+  constructor(private loginService:LoginService, private router: Router, private userService:UsuarioService) { }
     logout():void{
 
       this.loginService.logout();
@@ -18,6 +22,24 @@ export class HeaderComponent implements OnInit {
       //swal({title: 'hello', text: 'hello ${<strong>{name}</strong>}', icon: 'success' })
     }
  ngOnInit() {
+  if(this.loginService.isAuthenticated()){
+    this.listarOpciones();
+  }
+  }
+
+  listarOpciones(){
+      return this.userService.listarOpciones().subscribe(
+        (data) => {
+          this.requests = data['opc'];
+          console.log(this.requests);
+        }
+      );
+  }
+
+  recargar(){
+    if(this.loginService.isAuthenticated()){
+      window.location.reload();
+    }
   }
 
 }

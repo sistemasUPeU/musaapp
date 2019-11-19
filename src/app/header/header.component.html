@@ -25,8 +25,9 @@
             </li>
           </ul>
           <ul class="navbar-nav mr-auto" *ngIf="loginService.isAuthenticated()">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Buses</a>
+                <li class="nav-item" *ngFor="let request of requests">
+                  <i class="{{request.icono}}"></i>
+                    <a class="nav-link">{{request.menu}}</a>
                 </li>
           </ul>
           <ul class="navbar-nav ml-auto nav-flex-icons">
@@ -51,5 +52,8 @@
         </div>
 </nav>
 <h1 class="text-primary" *ngIf="loginService.isAuthenticated()" style="text-align: center;">Bienvenido al Sistema MUSA</h1>
+<div class="container">
+  <button class="btn btn-primary" (click)="listarOpciones()" *ngIf="loginService.isAuthenticated()">Cargar opciones</button>
+</div>
 
 

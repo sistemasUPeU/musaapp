@@ -5,6 +5,7 @@ import { Usuario } from '../modelo/usuario';
 import { UsuarioDatos } from '../modelo/UsuarioDato';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
+import { UsuarioService } from './usuario.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,10 +14,12 @@ export class LoginService {
   private _usuario: Usuario;
   private _token : string;
   private _userD:UsuarioDatos;
+  public idrole:number;
+  private userService:UsuarioService;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {}
   private agregarAutorizationHeader(){
-    
+
   }
   public get usuarioDato():UsuarioDatos{
     if(this._userD!=null){
@@ -57,7 +60,9 @@ export class LoginService {
     this._userD.detalle = datos.DETALLE;
     this._userD.idusuario = datos.IDUSUARIO;
     this._userD.idrol = datos.IDROL;
+    this.idrole = datos.IDROL;
     sessionStorage.setItem('usuario',JSON.stringify(this._userD));
+    console.log(this.idrole);
   }
   guardarToken(accesToken:string):void{
     this._token = accesToken;
@@ -82,4 +87,5 @@ export class LoginService {
     sessionStorage.clear();
    // sessionStorage.removeItem('token');
   }
+
 }

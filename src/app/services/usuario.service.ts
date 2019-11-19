@@ -14,14 +14,15 @@ import { LoginService } from '../services/login.service';
 })
 export class UsuarioService {
      private urlUser = "";
+     private t = this.loginService.token;
      private opciones = Object;
      private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json'});
-  constructor( private http: HttpClient, private router:Router, private loginService:LoginService) { }
+  constructor( private http: HttpClient, private router:Router, private loginService:LoginService) {}
   //método para realizar el accesos al backend
   private agregarAutorizacion(){
     let token = this.loginService.token;
     if(token!=null){
-      return this.httpHeaders.append('Autorization','Bear' + token);
+      return this.httpHeaders.append('Authorization','Bearer ' + token);
     }
     return this.httpHeaders;
   }/*
@@ -33,4 +34,10 @@ export class UsuarioService {
       })
     )
   }*/
+
+  listarOpciones(){
+    console.log(this.loginService.usuarioDato.idrol);
+    return this.http.get<any>(`http://localhost:8081/opciones/`+this.loginService.usuarioDato.idrol, {headers: this.agregarAutorizacion()});
+  }
+
 }

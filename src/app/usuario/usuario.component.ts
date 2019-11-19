@@ -19,6 +19,7 @@ export class UsuarioComponent implements OnInit {
    }
 
   ngOnInit() {
+    localStorage.setItem("contador","1");
     if(this.loginService.isAuthenticated()){
       Swal.fire('Login','Hola <b>'+this.loginService.usuarioDato.username+'</b> ya estas Autentificado', 'info');
       this.router.navigate(['/'])
@@ -35,7 +36,7 @@ export class UsuarioComponent implements OnInit {
       let usuario = this.loginService.usuarioDato;
       this.router.navigate(['/']);
       Swal.fire('Login', 'Bienvenido: <b>'+this.loginService.usuarioDato.username+'</b> has iniciado Sesión con éxito..!','success');
-      
+      window.location.reload();
     }, error =>{
       if(error.status==400){
         Swal.fire('Error Login', 'Usuario o clave incorrectas!', 'error');
@@ -46,5 +47,6 @@ export class UsuarioComponent implements OnInit {
   cancelar():void{
     this.router.navigate(['/']);
   }
+
 
 }
